@@ -1,0 +1,53 @@
+Android Enthusiasts	6611
+Android Enthusiasts Meta	834
+Apple	9327
+Apple Meta	1305
+Ask Ubuntu	19548
+Ask Ubuntu Meta	3296
+Bicycles	2002
+Bicycles Meta	471
+Cooking	5742
+Cooking Meta	1283
+Database Administrators	2922
+Database Administrators Meta	441
+Drupal Answers Meta	527
+Electrical Engineering	4237
+Electrical Engineering Meta	774
+English Language and Usage	11107
+English Language and Usage Meta	2161
+Game Development	7908
+Game Development Meta	1510
+Gaming	9648
+Gaming Meta	2294
+GIS	3326
+GIS Meta	772
+Home Improvement	3275
+Home Improvement Meta	555
+IT Security	4210
+IT Security Meta	565
+Mathematics	12526
+Mathematics Meta	3592
+Meta Server Fault	3478
+Meta Stack Overflow	31536
+Meta Super User	6550
+Photography	5211
+Photography Meta	1327
+Physics	4341
+Physics Meta	1019
+Programmers	31805
+Programmers Meta	6197
+Server Fault	61810
+Stack Apps	6041
+Stack Overflow	756696
+Statistical Analysis Meta	1152
+TeX - LaTeX Meta	1499
+Theoretical Computer Science	5152
+Theoretical Computer Science Meta	1341
+Unix and Linux	8860
+Unix and Linux Meta	1219
+Web Applications	9828
+Web Applications Meta	1486
+Webmasters	8213
+Webmasters Meta	1077
+WordPress	6864
+WordPress Meta	989
