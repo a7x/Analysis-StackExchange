@@ -1,4 +1,5 @@
 
+
 def getAcceptedId(elem):
     return elem.get("AcceptedAnswerId")
 
@@ -7,6 +8,7 @@ def getReputation(elem):
 
 def getId(elem):
     return elem.get("Id")
+    
 def getCreationDate(elem):
     return elem.get("CreationDate")
 
