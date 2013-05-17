@@ -1,4 +1,11 @@
+def getUserInfo(elem):
+    ''' id, upvotes, downvotes, views, reputation
+    '''
+    return (getId(elem), getupvotes(elem), getdownvotes(elem), getViews(elem),\
+    getReputation(elem))
 
+def getViews(elem):
+    return elem.get("Views")
 
 def getAcceptedId(elem):
     return elem.get("AcceptedAnswerId")
@@ -8,7 +15,7 @@ def getReputation(elem):
 
 def getId(elem):
     return elem.get("Id")
-    
+
 def getCreationDate(elem):
     return elem.get("CreationDate")
 
