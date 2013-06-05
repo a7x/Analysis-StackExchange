@@ -29,6 +29,7 @@ class Question:
         self.lengthTitle = len(self.title.split(' '))
         self.isFamous = 1 if self.isFamousQuestion(elem) else 0
 
+        self.numTags = 0
 
     def isFamousQuestion(self,elem):
         return int(getViewCount(elem)) > 10000
@@ -44,20 +45,38 @@ if(len(sys.argv)<2):
     print 'python name.py posts.xml userDetails.dict training.csv test.csv \
     randomIds result'
     sys.exit()
+
+headers = ['userId', 'lenTitle', 'lenBody', 'qScore', 'qFav', 'qComment', \
+'qAnswers', 'numTags', 'userRep', 'userViews', 'userUpVotes', \
+'userDownVotes','famous']
 #inputs
 infile_post = open(sys.argv[1], 'rb')
 usersDict = marshal.load(open(sys.argv[2],'rb'))
 context = etree.iterparse(infile_post)
 
 #outputs
-trainingcsv = csv.writer(open(sys.argv[3], 'wb'), delimiter='\t')
-testcsv = csv.writer(open(sys.argv[4],'wb'),delimiter='\t')
+trainingcsv = csv.DictWriter(open(sys.argv[3], 'wb'), fieldnames=headers, delimiter='\t')
+testcsv = csv.DictWriter(open(sys.argv[4],'wb'),fieldnames = headers, delimiter='\t')
 results = open(sys.argv[6],'w')
 rand = open(sys.argv[5],'r')
 testIds = fillIds(rand)
 
 questionsDict = {}
-print len(testIds)
+trainingcsv.writerow(dict((fn,fn) for fn in headers))
+testcsv.writerow(dict((fn,fn) for fn in headers))
+
+def addRow(d,user,question):
+    element = \
+    { 'userId':user.userId,'lenTitle':question.lengthTitle,'lenBody':question.length,\
+     'qScore':question.score, 'qFav':question.favCount, 'qComment':\
+     question.commentCount, 'qAnswers':question.answerCount, 'numTags':question.numTags, \
+     'userRep':user.reputation, 'userViews':user.views,\
+     'userUpVotes':user.upvotes,'userDownVotes':user.downvotes,\
+     'famous':question.isFamous }
+    d.append(element)
+    return d
+trainingRows = []
+testRows = []
 for event, elem in context:
     postTypeId = getPostTypeId(elem)
     if postTypeId == '1':
@@ -71,25 +90,16 @@ for event, elem in context:
 
         allTags = getTags(elem).lstrip('<').rstrip('>').split('><')
         numTags = len(allTags)
-        
-        
-       
-        row = \
-        [owner, question.lengthTitle, question.length, question.score, question.favCount, question.commentCount, question.answerCount, numTags,\
-        user.reputation, user.views, user.upvotes, user.downvotes]
-
+        question.numTags = numTags
         if(int(postId) in testIds):
-            #print 'Id found in test id ',postId
-            questionsDict[postId] = row
-            results.write(postId+'\t'+str(question.isFamous)+'\n')
+            addRow(testRows,user,question)
         else:
-            row.append(question.isFamous)
-            questionsDict[postId] = row
+            addRow(trainingRows, user, question)
     clearElem(elem)
 
-for postId in questionsDict:
-    if(int(postId) in testIds):
-        testcsv.writerow(questionsDict[postId])
-        continue
-    trainingcsv.writerow(questionsDict[postId])
+for obj in trainingRows:
+    trainingcsv.writerow(obj)
+
+for obj in testRows:
+    testcsv.writerow(obj)
 
