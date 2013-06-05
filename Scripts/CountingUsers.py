@@ -2,7 +2,7 @@
 import sys
 import os
 from lxml import etree
-from Utils import *
+from Utils import clearElem
 if(len(sys.argv)<2):
 	print 'python CountingUsers.py xmlTopDirectory outputfile'
 
