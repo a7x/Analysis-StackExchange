@@ -22,4 +22,13 @@ There was a slightly higher purpose of doing this project. I wanted to find out 
 Getting Started
 ===============
 
+I have added data about Bicycles StackExchange in the folder. Lets find out how many users . 
+
+<pre>
+Rohits-MacBook-Pro:Scripts rohitdholakia$ python CountingUsers.py ../Bicycles/users.xml 
+2002
+</pre>
+
+The script is very simple. But, it has a couple of things which will be seen throughout. Note that we are doing this work on a 4gb macbook pro with a modest processor. nothing fancy. Hence, dealing with this gigantic xml files keeping them all in memory in not an option. That is where the iterparse and clearElem() play a role. we parse it line-by-line and when we are done, we remove  the element and all its parents. The parents part becomes important if you are dealing with highly nested XML files.  
+
 
