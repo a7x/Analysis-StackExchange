@@ -4,18 +4,15 @@ import os
 from lxml import etree
 from Utils import clearElem
 if(len(sys.argv)<2):
-	print 'python CountingUsers.py xmlTopDirectory outputfile'
+	print 'python CountingUsers.py users.xml'
+inp = open(sys.argv[1],'r')
+context = etree.iterparse(inp)
+userCount = 0
+for event, elem in context:
+	userCount += 1
+	clearElem(elem)
+print userCount
 
-output = open(sys.argv[2], 'w')
-for l in os.listdir(sys.argv[1]):
-	if('.DS_Store' not in l):
-		userCount = 0
-		infile = open(os.path.join(sys.argv[1], l, 'users.xml'))
-		context = etree.iterparse(infile)
-		for event, elem in context:
-			userCount += 1
-			clearElem(elem)
-		output.write(l + '\t' + str(userCount) + '\n')
 
 
 
