@@ -4,8 +4,8 @@ import os
 import marshal 
 from lxml import etree
 from dateutil.relativedelta import *
-from datetime import *
-from Utils import *
+import datetime
+import Utils
 
 if(len(sys.argv)<2):
     print 'python name.py badges.xml posts.xml outputDict'
@@ -17,12 +17,12 @@ context = etree.iterparse(epicFile)
 epicUserIds = {}
 epicDetails = {}
 for event,elem in context:
-    badge = getBadge(elem)
-    userId = getUserId(elem)
-    date = getDate(elem)
+    badge = Utils.getBadge(elem)
+    userId = Utils.getUserId(elem)
+    date = Utils.getDate(elem)
     if(badge=="Epic"):
         epicUserIds[userId]=date
-    clearElem(elem)
+    Utils.clearElem(elem)
 
 infile = open(sys.argv[2],'r')
 context = etree.iterparse(infile)
@@ -40,8 +40,8 @@ def BeforeOrAfter(t1,t2):
 for event,elem in context:
     if(getPostTypeId(elem)=="1"):#is a question,I don't care. move on
         continue
-    ownerId = getOwner(elem)
-    time = getCreationDate(elem)
+    ownerId = Utils.getOwner(elem)
+    time = Utils.getCreationDate(elem)
 
     if(ownerId in epicUserIds):
         epicTime = epicUserIds[ownerId] #Time when he got the epic badge
@@ -51,7 +51,7 @@ for event,elem in context:
         else:
             epicDetails[ownerId]["after"]+=1
             numAnswersAfter+=1
-    clearElem(elem)
+    Utils.clearElem(elem)
 
 epicFile.close()
 print numAnswersBefore
