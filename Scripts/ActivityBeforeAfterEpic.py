@@ -3,7 +3,6 @@ import sys
 import os
 import marshal 
 from lxml import etree
-from dateutil.relativedelta import *
 import datetime
 import Utils
 
