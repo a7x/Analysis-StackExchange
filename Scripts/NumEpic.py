@@ -1,14 +1,14 @@
 import sys
 from lxml import etree
-from Utils import *
+import Utils
 
 userXml = open(sys.argv[1],'r')
 context = etree.iterparse(userXml)
 countEpic = 0
 for event, elem in context:
-    name = getBadgeName(elem)
+    name = Utils.getBadgeName(elem)
     if(name=="Epic"):
         countEpic += 1
-    clearElem(elem)
+    Utils.clearElem(elem)
 print countEpic
 

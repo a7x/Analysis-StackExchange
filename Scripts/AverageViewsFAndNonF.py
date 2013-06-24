@@ -5,7 +5,7 @@ from __future__ import division
 import sys
 import os
 from lxml import etree
-from Utils import *
+import Utils
 infile = open(sys.argv[1],'r')
 
 context = etree.iterparse(infile)
@@ -14,15 +14,15 @@ sumNonFamous = 0
 numFamous = 0
 numNonFamous = 0
 for event,elem in context:
-    if(getPostTypeId(elem)=="1"):
-        if(getViewCount(elem)):
-            viewCount = int(getViewCount(elem))
+    if(Utils.getPostTypeId(elem)=="1"):
+        if(Utils.getViewCount(elem)):
+            viewCount = int(Utils.getViewCount(elem))
             if(viewCount>10000):
-                sumFamous+=viewCount
-                numFamous +=1
+                sumFamous += viewCount
+                numFamous += 1
             else:
                 sumNonFamous += viewCount
-                numNonFamous +=1
-    clearElem(elem)
+                numNonFamous += 1
+    Utils.clearElem(elem)
 print 'average views Famous is ',sumFamous/numFamous
 print 'average views non Famous is ',sumNonFamous/numNonFamous

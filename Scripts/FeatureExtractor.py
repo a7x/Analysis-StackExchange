@@ -81,13 +81,9 @@ for event, elem in context:
     postTypeId = getPostTypeId(elem)
     if postTypeId == '1':
         owner = getOwner(elem)
-
         user = User(owner,usersDict[owner])
         question = Question(elem)
-        
         postId = getId(elem)
-        
-
         allTags = getTags(elem).lstrip('<').rstrip('>').split('><')
         numTags = len(allTags)
         question.numTags = numTags
