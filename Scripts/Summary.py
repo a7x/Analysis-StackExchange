@@ -9,7 +9,7 @@
 '''
 from lxml import etree
 import sys
-from Utils import *
+import Utils
 import os
 class Stats:
 	def __init__(self, users, badges, posts):
@@ -24,31 +24,30 @@ class Stats:
 	def numUsers(self):
 		for event, elem in self.userContext:
 			self.summary["users"] += 1
-			clearElem(elem)
+			Utils.clearElem(elem)
 	
 	def answerFeatures(self):
 		for event, elem in self.postContext:
-			if(getPostTypeId(elem) == "1"):#is question
+			if(Utils.getPostTypeId(elem) == "1"):#is question
 				self.summary["questions"] += 1
-				if(int(getViewCount(elem)) > 10000):
+				if Utils.getViewCount(elem) > 10000:
 					self.summary["famous"] += 1
-				if(getAcceptedId(elem) is not None):
+				if Utils.getAcceptedId(elem):
 					self.summary["accepted"] += 1
 			else:
 				self.summary["answers"] += 1
-			clearElem(elem)
+			Utils.clearElem(elem)
 	
 	def numEpic(self):
 		for event, elem in self.badgeContext:
-			if(getBadgeName(elem) == "Epic"):
+			if(Utils.getBadgeName(elem) == "Epic"):
 				self.summary["epic"] += 1
-			clearElem(elem)
+			Utils.clearElem(elem)
 
 	def printSummary(self):
-		print ' yo ! ',
-		print ' num users and epic users are ', self.summary["users"], '\t', self.summary["epic"]
-		print 'num questions and answers and accepted answers are ', self.summary["questions"], '\t', self.summary["answers"], '\t', self.summary["accepted"]
-		print ' and finally, num famous in this are ', self.summary["famous"]
+		print 'Num Users: num epic Users : ', self.summary['users'], '\t', self.summary['epic']
+		print 'num questions: answers : accepted answers: ', self.summary['questions'], self.summary['answers'], self.summary['accepted']
+		print 'num famous: ', self.summary['famous']
 
 		
 		

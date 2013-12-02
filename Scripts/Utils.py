@@ -33,7 +33,7 @@ def getOwner(elem):
     return elem.get("OwnerUserId")
 
 def getViewCount(elem):
-    return elem.get("ViewCount")
+    return int(elem.get("ViewCount"))
 
 def getupvotes(elem):
     return elem.get("UpVotes")
