@@ -28,7 +28,7 @@ class Stats:
 	
 	def answerFeatures(self):
 		for event, elem in self.postContext:
-			if(Utils.getPostTypeId(elem) == "1"):#is question
+			if Utils.getPostTypeId(elem) == "1":#is question
 				self.summary["questions"] += 1
 				if Utils.getViewCount(elem) > 10000:
 					self.summary["famous"] += 1
@@ -40,7 +40,7 @@ class Stats:
 	
 	def numEpic(self):
 		for event, elem in self.badgeContext:
-			if(Utils.getBadgeName(elem) == "Epic"):
+			if Utils.getBadgeName(elem) == "Epic":
 				self.summary["epic"] += 1
 			Utils.clearElem(elem)
 
