@@ -1,16 +1,16 @@
 #give the top level xml directory and this script will return 
 '''
-	num users
+	Num users
 	Num epic users
-	num famous questions
-	num questions 
-	num answers
-	
+	Num famous questions
+	Num questions 
+	Num answers	
 '''
 from lxml import etree
 import sys
 import Utils
 import os
+
 class Stats:
 	def __init__(self, users, badges, posts):
 		self.users = users
@@ -62,11 +62,11 @@ if __name__ == '__main__':
 	if(len(sys.argv)<2):
 		print 'python name.py topLevelDirectory'
 		sys.exit()
+
+	with open(os.path.join(sys.argv[1], 'users.xml')) as users, open(os.path.join(sys.argv[1], 'badges.xml')) as badges, \
+		open(os.path.join(sys.argv[1], 'posts.xml')) as posts:
+		summ = Stats(users, badges, posts)
+		summ.generateSummary()
 	
-	users = open(os.path.join(sys.argv[1],'users.xml'),'r')
-	badges = open(os.path.join(sys.argv[1],'badges.xml'), 'r')
-	posts = open(os.path.join(sys.argv[1],'posts.xml'), 'r')
-	
-	summ = Stats(users, badges, posts)
-	summ.generateSummary()		
+		
 		

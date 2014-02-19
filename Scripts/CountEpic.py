@@ -1,16 +1,16 @@
 import sys
 import os
 from lxml import etree
-from Utils import *
-infile = open(sys.argv[1],'r')
+import Utils
 
-context = etree.iterparse(infile)
 
 count = 0
-for event, elem in context:
-	if(getBadge(elem)=="Epic"):
-		count+=1
-	clearElem(elem)
+with open(sys.argv[1]) as infile:
+	context = etree.iterparse(infile)
+	for event, elem in context:
+		if(getBadge(elem)=="Epic"):
+			count+=1
+		Utils.clearElem(elem)
 
 print count
 

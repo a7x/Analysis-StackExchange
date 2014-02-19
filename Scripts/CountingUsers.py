@@ -2,7 +2,7 @@
 import sys
 import os
 from lxml import etree
-from Utils import clearElem
+import Utils
 if(len(sys.argv)<2):
 	print 'python CountingUsers.py users.xml'
 	sys.exit()
@@ -10,9 +10,11 @@ if(len(sys.argv)<2):
 inp = open(sys.argv[1],'r')
 context = etree.iterparse(inp)
 userCount = 0
-for event, elem in context:
-	userCount += 1
-	clearElem(elem)
+with open(sys.argv[1]) as infile:
+	context = etree.iterparse(infile)
+	for event, elem in context:
+		userCount += 1
+		Utils.clearElem(elem)
 print userCount
 
 

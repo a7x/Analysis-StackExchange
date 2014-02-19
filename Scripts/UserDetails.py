@@ -1,9 +1,9 @@
 import sys
 import os
 import marshal
-from Utils import *
+import Utils
 from lxml import etree
-if(len(sys.argv)<2):
+if len(sys.argv)<2:
     print 'python name.py posts.xml acceptedIdsList users.xml userDictOutput'
     sys.exit()
 userdict = {}
